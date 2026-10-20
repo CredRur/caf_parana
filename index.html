@@ -127,6 +127,7 @@ tfoot td{font-weight:700;background:var(--panel);position:sticky;bottom:0}
 #map .st{fill:none;stroke:var(--redge);stroke-width:1.6;vector-effect:non-scaling-stroke;pointer-events:none}
 .mside h2{margin-bottom:2px}
 .mside select{width:100%;min-width:0;margin:6px 0 16px}
+.leg div small{color:var(--muted);margin-left:auto;padding-left:10px}
 .leg{display:flex;flex-direction:column;gap:5px;font-size:13px;font-variant-numeric:tabular-nums}
 .leg div{display:flex;align-items:center;gap:8px}
 .leg i{width:22px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--line)}
@@ -351,12 +352,14 @@ function paintMap(){
   $('selp').setAttribute('d', S.mun && GEO.m[S.mun] ? GEO.m[S.mun] : '');
   // legenda
   const vals=D.map(d=>d[k]); const mx=Math.max(...vals);
-  const edges=[0,...BR,mx]; let rows=`<div><i style="background:var(--c0)"></i>Sem registro</div>`;
+  const edges=[0,...BR,mx];
+  const cnt=(lo,hi)=>D.filter(d=>d[k]>=lo&&d[k]<=hi).length;
+  let rows=`<div><i style="background:var(--c0)"></i>Sem registro<small>${D.filter(d=>!d[k]).length} mun.</small></div>`;
   const n=BR.length+1;
   for(let c=1;c<=n;c++){
     const lo=c===1?1:edges[c-1]+1, hi=edges[c];
     if(hi<lo) continue;
-    rows+=`<div><i style="background:var(--c${c})"></i>${lo===hi?fmt(lo):fmt(lo)+' a '+fmt(hi)}</div>`;
+    rows+=`<div><i style="background:var(--c${c})"></i>${lo===hi?fmt(lo):fmt(lo)+' a '+fmt(hi)}<small>${cnt(lo,hi)} mun.</small></div>`;
   }
   $('leg').innerHTML=rows;
   zoomTo(S.reg? GEO.r[S.reg].b : FULL);
