@@ -12,7 +12,7 @@
   --green:#2E6B4C; --green-soft:#CFE3D6; --ochre:#B9862A; --ochre-soft:#F1E1BF;
   --blue:#3C6788; --blue-soft:#D4E1EC; --rose:#A5506A; --rose-soft:#F0D6DE;
   --hl:#FFF4D6; --shadow:0 1px 0 rgba(24,41,31,.06);
-  --c0:#E3E8E4; --c1:#DDF0E2; --c2:#B4DCBF; --c3:#80C096; --c4:#4C9D6C; --c5:#2A744B; --c6:#12452B; --edge:#FFFFFF; --redge:#2B3A31;
+  --c0:#E3E8E4; --c1:#D6EBDC; --c2:#A8D3B4; --c3:#6FB186; --c4:#3B8A5B; --c5:#1B5436; --edge:#FFFFFF; --redge:#2B3A31;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -20,7 +20,7 @@
     --green:#6FB48E; --green-soft:#28422F; --ochre:#E0B25A; --ochre-soft:#4A3B1C;
     --blue:#7FA9CC; --blue-soft:#253A4B; --rose:#D98AA2; --rose-soft:#4A2833;
     --hl:#3A3520; --shadow:none;
-    --c0:#26312B; --c1:#1E3A29; --c2:#285539; --c3:#35744E; --c4:#4C9A68; --c5:#76BE8E; --c6:#B0E0BE; --edge:#1B2620; --redge:#C9D6CE;
+    --c0:#26312B; --c1:#23402F; --c2:#2E5E41; --c3:#3F8559; --c4:#62AE7C; --c5:#9FD8B1; --edge:#1B2620; --redge:#C9D6CE;
   }
 }
 :root[data-theme="dark"]{
@@ -28,7 +28,7 @@
   --green:#6FB48E; --green-soft:#28422F; --ochre:#E0B25A; --ochre-soft:#4A3B1C;
   --blue:#7FA9CC; --blue-soft:#253A4B; --rose:#D98AA2; --rose-soft:#4A2833;
   --hl:#3A3520; --shadow:none;
-  --c0:#26312B; --c1:#1E3A29; --c2:#285539; --c3:#35744E; --c4:#4C9A68; --c5:#76BE8E; --c6:#B0E0BE; --edge:#1B2620; --redge:#C9D6CE;
+  --c0:#26312B; --c1:#23402F; --c2:#2E5E41; --c3:#3F8559; --c4:#62AE7C; --c5:#9FD8B1; --edge:#1B2620; --redge:#C9D6CE;
 }
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -127,9 +127,6 @@ tfoot td{font-weight:700;background:var(--panel);position:sticky;bottom:0}
 #map .st{fill:none;stroke:var(--redge);stroke-width:1.6;vector-effect:non-scaling-stroke;pointer-events:none}
 .mside h2{margin-bottom:2px}
 .mside select{width:100%;min-width:0;margin:6px 0 16px}
-.mside .scl{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-top:-6px}
-.mside #fScale{margin-top:4px}
-.leg div small{color:var(--muted);margin-left:auto;padding-left:10px}
 .leg{display:flex;flex-direction:column;gap:5px;font-size:13px;font-variant-numeric:tabular-nums}
 .leg div{display:flex;align-items:center;gap:8px}
 .leg i{width:22px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--line)}
@@ -200,12 +197,6 @@ footer{margin-top:28px;color:var(--muted);font-size:13px;line-height:1.55;max-wi
       <h2>Mapa por município</h2>
       <p class="hint" style="margin:0">Clique em um município para ver o detalhe; as linhas mais fortes marcam as regionais</p>
       <select id="fMapMetric" aria-label="Indicador do mapa"></select>
-      <label class="scl" for="fScale">Tipo de escala</label>
-      <select id="fScale" aria-label="Tipo de escala do mapa">
-        <option value="eq">Intervalos iguais (mín. ao máx.)</option>
-        <option value="log">Intervalos crescentes (log)</option>
-        <option value="qt">Mesmo nº de municípios por faixa</option>
-      </select>
       <div class="leg" id="leg"></div>
       <div class="info" id="info"></div>
     </aside>
@@ -278,7 +269,7 @@ footer{margin-top:28px;color:var(--muted);font-size:13px;line-height:1.55;max-wi
 
   <footer>
     Fonte: MDA, Departamento de Cadastro Nacional da Agricultura Familiar, planilha SETEMBRO2026 (extraída em 01/10/2026), recorte UF = PR. Regionais conforme tabela da Assessoria Estadual de Crédito Rural e Fundiário do IDR-Paraná.
-    Localização, caracterização e atividade contam UFPAs; gênero e juventude contam pessoas, por isso os totais diferem. Pinhais não tem registros de pessoa física na base e aparece zerado. Seis municípios não constam na tabela de jovens da fonte e aparecem com zero jovens. Entidades emissoras agrupadas em IDR-Paraná, INCRA (dois CNPJs), Municípios, Sindicatos dos Trabalhadores (STRs, sindicatos da agricultura familiar e SINTRAF) e Sindicatos Rurais (patronais, de empregadores e de produtores rurais); as demais aparecem com o nome original. Malha municipal do IBGE (projeto geodata-br), simplificada para exibição; as cores do mapa usam 6 faixas, por padrão em intervalos iguais entre o menor e o maior valor; o seletor permite trocar por intervalos crescentes (logarítmica) ou por faixas com a mesma quantidade de municípios.
+    Localização, caracterização e atividade contam UFPAs; gênero e juventude contam pessoas, por isso os totais diferem. Pinhais não tem registros de pessoa física na base e aparece zerado. Seis municípios não constam na tabela de jovens da fonte e aparecem com zero jovens. Entidades emissoras agrupadas em IDR-Paraná, INCRA (dois CNPJs), Municípios, Sindicatos dos Trabalhadores (STRs, sindicatos da agricultura familiar e SINTRAF) e Sindicatos Rurais (patronais, de empregadores e de produtores rurais); as demais aparecem com o nome original. Malha municipal do IBGE (projeto geodata-br), simplificada para exibição; as cores do mapa dividem os municípios com registro em faixas de quantidade semelhante.
   </footer>
 </div>
 
@@ -307,7 +298,7 @@ const REGS = [...new Set(D.map(d=>d.reg))].sort(cmp);
 const sum = rows => { const o={}; [...F.slice(3),'ufpa','pes','jov','esp'].forEach(k=>o[k]=rows.reduce((s,r)=>s+r[k],0)); return o; };
 const STATE = sum(D);
 
-const S = {reg:'', mun:'', metric:'ufpa', scale:'eq', view:'rank', sortKey:'ufpa', sortDir:-1};
+const S = {reg:'', mun:'', metric:'ufpa', view:'rank', sortKey:'ufpa', sortDir:-1};
 try { const m = localStorage.getItem('cafpr-metric'); if (m && METRICS.some(x=>x[0]===m)) S.metric = m; } catch(e){}
 
 const $ = id => document.getElementById(id);
@@ -335,31 +326,18 @@ let VB=[...FULL];
     p.addEventListener('click',()=>setMun(p.dataset.i));
   });
 })();
-// faixas do mapa: 6 classes + "sem registro"
-const NB=6;
-function niceUp(x){ if(x<=1) return 1; const p=Math.pow(10,Math.floor(Math.log10(x))); return Math.ceil(x/p)*p; }
-function round2(x){ if(x<10) return Math.round(x); const p=Math.pow(10,Math.floor(Math.log10(x))-1); return Math.round(x/p)*p; }
-function uniqUp(br,mx){ const out=[]; for(const b of br){ const v=Math.max(b,(out.length?out[out.length-1]:0)+1); if(v<mx) out.push(v); } return out; }
 function classes(k){
   const v=D.map(d=>d[k]).filter(x=>x>0).sort((a,b)=>a-b);
   if(!v.length) return [];
-  const mx=v[v.length-1];
-  if(S.scale==='eq'){
-    const st=niceUp(mx/NB); const br=[]; for(let c=1;c<NB;c++) br.push(c*st);
-    return uniqUp(br,mx);
-  }
-  if(S.scale==='log'){
-    const br=[]; for(let c=1;c<NB;c++) br.push(round2(Math.pow(mx,c/NB)));
-    return uniqUp(br,mx);
-  }
-  const q=[]; for(let c=1;c<NB;c++) q.push(v[Math.min(v.length-1,Math.floor(c/NB*v.length))]);
-  return uniqUp([...new Set(q)],mx);
+  const q=[.2,.4,.6,.8].map(p=>v[Math.min(v.length-1,Math.floor(p*v.length))]);
+  const br=[...new Set(q)];
+  return br;
 }
 let BR=[];
 function colorOf(val){
   if(!val) return 'var(--c0)';
   let c=1; for(const b of BR){ if(val>b) c++; }
-  return `var(--c${Math.min(c,NB)})`;
+  return `var(--c${Math.min(c,5)})`;
 }
 function paintMap(){
   const k=S.metric; BR=classes(k);
@@ -373,15 +351,12 @@ function paintMap(){
   $('selp').setAttribute('d', S.mun && GEO.m[S.mun] ? GEO.m[S.mun] : '');
   // legenda
   const vals=D.map(d=>d[k]); const mx=Math.max(...vals);
-  const edges=[0,...BR,mx];
-  const cnt=(lo,hi)=>D.filter(d=>d[k]>=lo&&d[k]<=hi).length;
-  const nz=D.filter(d=>!d[k]).length;
-  let rows=`<div><i style="background:var(--c0)"></i>Sem registro<small>${nz} mun.</small></div>`;
+  const edges=[0,...BR,mx]; let rows=`<div><i style="background:var(--c0)"></i>Sem registro</div>`;
   const n=BR.length+1;
   for(let c=1;c<=n;c++){
     const lo=c===1?1:edges[c-1]+1, hi=edges[c];
     if(hi<lo) continue;
-    rows+=`<div><i style="background:var(--c${c})"></i>${lo===hi?fmt(lo):fmt(lo)+' a '+fmt(hi)}<small>${cnt(lo,hi)} mun.</small></div>`;
+    rows+=`<div><i style="background:var(--c${c})"></i>${lo===hi?fmt(lo):fmt(lo)+' a '+fmt(hi)}</div>`;
   }
   $('leg').innerHTML=rows;
   zoomTo(S.reg? GEO.r[S.reg].b : FULL);
@@ -518,8 +493,6 @@ $('fMun').onchange = e => setMun(e.target.value);
 const setMetric = v => { S.metric=v; try{localStorage.setItem('cafpr-metric',S.metric)}catch(err){} renderRank(); paintMap(); };
 $('fMetric').onchange = e => setMetric(e.target.value);
 $('fMapMetric').onchange = e => setMetric(e.target.value);
-$('fScale').onchange = e => { S.scale=e.target.value; try{localStorage.setItem('cafpr-scale',S.scale)}catch(err){} paintMap(); };
-try { const sc=localStorage.getItem('cafpr-scale'); if(sc&&['eq','log','qt'].includes(sc)){ S.scale=sc; $('fScale').value=sc; paintMap(); } } catch(e){}
 $('tRank').onclick = () => { S.view='rank'; $('tRank').setAttribute('aria-pressed','true'); $('tTbl').setAttribute('aria-pressed','false'); renderRank(); };
 $('tTbl').onclick = () => { S.view='tbl'; $('tTbl').setAttribute('aria-pressed','true'); $('tRank').setAttribute('aria-pressed','false'); renderRank(); };
 
