@@ -499,7 +499,7 @@ function renderEnq(){
   const ab=sm('qab'),a=sm('qa'),b=sm('qb'),v=sm('qv'),tot=ab+a+b+v,uf=sm('ufpa'),sem=Math.max(0,uf-tot);
   const P=(x,t)=>pf(x/(t||1));
   $('enqHint').textContent=(S.mun?BYI[S.mun].mun:S.reg?'Regional '+S.reg:'Paraná')+', '+fmt(tot)+' CAFs enquadrados';
-  const K=[['ea',ab+a,'Com enquadramento A','Assentados, PNCF, quilombolas e indígenas'],['eb',ab+b,'Com enquadramento B','Renda familiar até R$ 60 mil/ano'],['ev',tot,'Com enquadramento V','Regra geral do Pronaf'],[null,sem,'Sem enquadramento','UFPAs com CAF fora das combinações']];
+  const K=[['ea',ab+a,'Com enquadramento A','Assentados PNRA, PNCF, Quilombolas e Indígenas<br>Com acesso à linha especial Pronaf A'],['eb',ab+b,'Com enquadramento B','Com acesso à linha especial Pronaf B'],['ev',tot,'Com enquadramento V','Com acesso ao Pronaf'],[null,sem,'Sem enquadramento','UFPAs sem acesso ao Pronaf (renda acima de R$ 500 mil)']];
   $('enqKpis').innerHTML=K.map(([k,val,l,c])=>`<button type="button" class="ek${k&&S.metric===k?' on':''}" ${k?`data-k="${k}"`:'disabled'}><div class="l">${l}</div><div class="v">${fmt(val)}</div><div class="c">${k?P(val,tot)+' dos CAFs enquadrados':P(val,uf)+' das UFPAs com CAF'}</div><div class="c">${c}</div>${k?`<div class="go">${S.metric===k?'No mapa agora':'Ver no mapa'}</div>`:''}</button>`).join('');
   $('enqKpis').querySelectorAll('.ek[data-k]').forEach(bt=>bt.onclick=()=>setMetric(bt.dataset.k));
   const C=[['qab',ab,'A e B (+V)','--qab','--qtab'],['qa',a,'A sem B (+V)','--qa','--qtab'],['qb',b,'B sem A (+V)','--qb','--qtb'],['qv',v,'Só V','--qv','--qtv']];
