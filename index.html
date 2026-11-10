@@ -12,7 +12,7 @@
   --green:#2E6B4C; --green-soft:#CFE3D6; --ochre:#B9862A; --ochre-soft:#F1E1BF;
   --blue:#3C6788; --blue-soft:#D4E1EC; --rose:#A5506A; --rose-soft:#F0D6DE;
   --hl:#FFF4D6; --shadow:0 1px 0 rgba(24,41,31,.06);
-  --qab:#3C3489; --qa:#7F77DD; --qb:#1D9E75; --qv:#D3D1C7; --qtab:#EEEDFE; --qtb:#04342C; --qtv:#2C2C2A;
+  --qab:#3C3489; --qa:#7F77DD; --qb:#1D9E75; --qv:#D3D1C7; --qtab:#EEEDFE; --qtb:#04342C; --qtv:#2C2C2A; --qs:#F5C4B3; --qts:#712B13;
   --c0:#E3E8E4; --c1:#D6EBDC; --c2:#A8D3B4; --c3:#6FB186; --c4:#3B8A5B; --c5:#1B5436; --edge:#FFFFFF; --redge:#2B3A31;
 }
 @media (prefers-color-scheme: dark){
@@ -21,7 +21,7 @@
     --green:#6FB48E; --green-soft:#28422F; --ochre:#E0B25A; --ochre-soft:#4A3B1C;
     --blue:#7FA9CC; --blue-soft:#253A4B; --rose:#D98AA2; --rose-soft:#4A2833;
     --hl:#3A3520; --shadow:none;
-    --qab:#AFA9EC; --qa:#534AB7; --qb:#5DCAA5; --qv:#444441; --qtab:#26215C; --qtb:#04342C; --qtv:#F1EFE8;
+    --qab:#AFA9EC; --qa:#534AB7; --qb:#5DCAA5; --qv:#444441; --qtab:#26215C; --qtb:#04342C; --qtv:#F1EFE8; --qs:#712B13; --qts:#FAECE7;
     --c0:#26312B; --c1:#23402F; --c2:#2E5E41; --c3:#3F8559; --c4:#62AE7C; --c5:#9FD8B1; --edge:#1B2620; --redge:#C9D6CE;
   }
 }
@@ -30,7 +30,7 @@
   --green:#6FB48E; --green-soft:#28422F; --ochre:#E0B25A; --ochre-soft:#4A3B1C;
   --blue:#7FA9CC; --blue-soft:#253A4B; --rose:#D98AA2; --rose-soft:#4A2833;
   --hl:#3A3520; --shadow:none;
-    --qab:#AFA9EC; --qa:#534AB7; --qb:#5DCAA5; --qv:#444441; --qtab:#26215C; --qtb:#04342C; --qtv:#F1EFE8;
+    --qab:#AFA9EC; --qa:#534AB7; --qb:#5DCAA5; --qv:#444441; --qtab:#26215C; --qtb:#04342C; --qtv:#F1EFE8; --qs:#712B13; --qts:#FAECE7;
   --c0:#26312B; --c1:#23402F; --c2:#2E5E41; --c3:#3F8559; --c4:#62AE7C; --c5:#9FD8B1; --edge:#1B2620; --redge:#C9D6CE;
 }
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -165,7 +165,7 @@ tfoot td{font-weight:700;background:var(--panel);position:sticky;bottom:0}
 .enq-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;margin-bottom:12px}
 .enq-head h2{margin:0}
 .enq-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
-.ek{font:inherit;text-align:left;background:var(--bg);border:1px solid transparent;border-radius:8px;padding:10px 12px;color:inherit;cursor:pointer}
+.ek{font:inherit;text-align:left;display:flex;flex-direction:column;justify-content:flex-start;background:var(--bg);border:1px solid transparent;border-radius:8px;padding:10px 12px;color:inherit;cursor:pointer}
 .ek:hover{border-color:var(--line)}
 .ek.on{border-color:var(--ochre);background:var(--hl)}
 .ek[disabled]{cursor:default}
@@ -228,7 +228,7 @@ footer{margin-top:28px;color:var(--muted);font-size:13px;line-height:1.55;max-wi
     <div class="enq" id="enqSec">
       <div class="enq-head"><h2>Enquadramento Pronaf</h2><p class="hint" style="margin:0" id="enqHint"></p></div>
       <div class="enq-kpis" id="enqKpis"></div>
-      <p class="hint" style="margin:0 0 6px">Cada CAF entra em uma só combinação; a barra soma 100% dos CAFs enquadrados</p>
+      <p class="hint" style="margin:0 0 6px">Cada CAF entra em uma só combinação; a barra soma 100% das UFPAs com CAF</p>
       <div class="enq-bar" id="enqBar" role="img"></div>
       <table class="enq-tbl"><thead><tr><th>Combinação</th><th>CAFs</th><th>Pessoas</th><th>% mulheres</th></tr></thead><tbody id="enqTbl"></tbody></table>
     </div>
@@ -301,7 +301,7 @@ footer{margin-top:28px;color:var(--muted);font-size:13px;line-height:1.55;max-wi
 
   <footer>
     Fonte: MDA, Departamento de Cadastro Nacional da Agricultura Familiar, planilha SETEMBRO2026 (extraída em 01/10/2026), recorte UF = PR. Regionais conforme tabela da Assessoria Estadual de Crédito Rural e Fundiário do IDR-Paraná.
-    Localização, caracterização e atividade contam UFPAs; gênero e juventude contam pessoas, por isso os totais diferem. Pinhais não tem registros de pessoa física na base e aparece zerado. Seis municípios não constam na tabela de jovens da fonte e aparecem com zero jovens. Entidades emissoras agrupadas em IDR-Paraná, INCRA (dois CNPJs), Municípios, Sindicatos dos Trabalhadores (STRs, sindicatos da agricultura familiar e SINTRAF) e Sindicatos Rurais (patronais, de empregadores e de produtores rurais); as demais aparecem com o nome original. Enquadramento Pronaf conforme a aba ENQUADRAMENTO do MDA: A inclui o A/C (complementar), B é o público de renda familiar até R$ 60 mil por ano e V é a regra geral; um CAF pode ter mais de um enquadramento, por isso os totais de A, B e V se sobrepõem, enquanto as quatro combinações da barra somam 100%. Malha municipal do IBGE (projeto geodata-br), simplificada para exibição; as cores do mapa dividem os municípios com registro em faixas de quantidade semelhante.
+    Localização, caracterização e atividade contam UFPAs; gênero e juventude contam pessoas, por isso os totais diferem. Pinhais não tem registros de pessoa física na base e aparece zerado. Seis municípios não constam na tabela de jovens da fonte e aparecem com zero jovens. Entidades emissoras agrupadas em IDR-Paraná, INCRA (dois CNPJs), Municípios, Sindicatos dos Trabalhadores (STRs, sindicatos da agricultura familiar e SINTRAF) e Sindicatos Rurais (patronais, de empregadores e de produtores rurais); as demais aparecem com o nome original. Enquadramento Pronaf conforme a aba ENQUADRAMENTO do MDA: A inclui o A/C (complementar), B é o público de renda familiar até R$ 60 mil por ano e V é a regra geral; um CAF pode ter mais de um enquadramento, por isso os totais de A, B e V se sobrepõem, enquanto as quatro combinações e o grupo sem enquadramento somam 100% das UFPAs com CAF; o grupo sem enquadramento é calculado pela diferença entre o total de UFPAs da aba GERAL e as combinações da aba ENQUADRAMENTO, que não traz o número de pessoas desse grupo. Malha municipal do IBGE (projeto geodata-br), simplificada para exibição; as cores do mapa dividem os municípios com registro em faixas de quantidade semelhante.
   </footer>
 </div>
 
@@ -498,15 +498,15 @@ function renderEnq(){
   const sm=k=>rows.reduce((s,d)=>s+d[k],0);
   const ab=sm('qab'),a=sm('qa'),b=sm('qb'),v=sm('qv'),tot=ab+a+b+v,uf=sm('ufpa'),sem=Math.max(0,uf-tot);
   const P=(x,t)=>pf(x/(t||1));
-  $('enqHint').textContent=(S.mun?BYI[S.mun].mun:S.reg?'Regional '+S.reg:'Paraná')+', '+fmt(tot)+' CAFs enquadrados';
+  $('enqHint').textContent=(S.mun?BYI[S.mun].mun:S.reg?'Regional '+S.reg:'Paraná')+', '+fmt(uf)+' UFPAs com CAF';
   const K=[['ea',ab+a,'Com enquadramento A','Assentados PNRA, PNCF, Quilombolas e Indígenas<br>Com acesso à linha especial Pronaf A'],['eb',ab+b,'Com enquadramento B','Com acesso à linha especial Pronaf B'],['ev',tot,'Com enquadramento V','Com acesso ao Pronaf'],[null,sem,'Sem enquadramento','UFPAs sem acesso ao Pronaf (renda acima de R$ 500 mil)']];
-  $('enqKpis').innerHTML=K.map(([k,val,l,c])=>`<button type="button" class="ek${k&&S.metric===k?' on':''}" ${k?`data-k="${k}"`:'disabled'}><div class="l">${l}</div><div class="v">${fmt(val)}</div><div class="c">${k?P(val,tot)+' dos CAFs enquadrados':P(val,uf)+' das UFPAs com CAF'}</div><div class="c">${c}</div>${k?`<div class="go">${S.metric===k?'No mapa agora':'Ver no mapa'}</div>`:''}</button>`).join('');
+  $('enqKpis').innerHTML=K.map(([k,val,l,c])=>`<button type="button" class="ek${k&&S.metric===k?' on':''}" ${k?`data-k="${k}"`:'disabled'}><div class="l">${l}</div><div class="v">${fmt(val)}</div><div class="c">${P(val,uf)} das UFPAs com CAF</div><div class="c">${c}</div>${k?`<div class="go">${S.metric===k?'No mapa agora':'Ver no mapa'}</div>`:''}</button>`).join('');
   $('enqKpis').querySelectorAll('.ek[data-k]').forEach(bt=>bt.onclick=()=>setMetric(bt.dataset.k));
-  const C=[['qab',ab,'A e B (+V)','--qab','--qtab'],['qa',a,'A sem B (+V)','--qa','--qtab'],['qb',b,'B sem A (+V)','--qb','--qtb'],['qv',v,'Só V','--qv','--qtv']];
-  $('enqBar').innerHTML=tot?C.map(([k,x,l,bg,tx])=>`<div title="${l}: ${fmt(x)}" style="width:${x/tot*100}%;background:var(${bg});color:var(${tx})">${x/tot*($('enqBar').clientWidth||600)>=46?P(x,tot):''}</div>`).join(''):'';
+  const C=[['qab',ab,'A e B (+V)','--qab','--qtab'],['qa',a,'A sem B (+V)','--qa','--qtab'],['qb',b,'B sem A (+V)','--qb','--qtb'],['qv',v,'Só V','--qv','--qtv'],['sem',sem,'Sem enquadramento','--qs','--qts']];
+  $('enqBar').innerHTML=uf?C.map(([k,x,l,bg,tx])=>`<div title="${l}: ${fmt(x)}" style="width:${x/uf*100}%;background:var(${bg});color:var(${tx})">${x/uf*($('enqBar').clientWidth||600)>=46?P(x,uf):''}</div>`).join(''):'';
   $('enqBar').setAttribute('aria-label',C.map(([k,x,l])=>`${l} ${fmt(x)}`).join(', '));
-  $('enqTbl').innerHTML=C.map(([k,x,l,bg],i)=>{ const m=rows.reduce((s,d)=>s+d.qm[i],0), f=rows.reduce((s,d)=>s+d.qf[i],0);
-    return `<tr><td><i style="background:var(${bg})"></i>${l}</td><td>${fmt(x)}<small style="color:var(--muted);margin-left:6px">${P(x,tot)}</small></td><td>${fmt(m+f)}</td><td>${(m+f)?P(f,m+f):'-'}</td></tr>`; }).join('');
+  $('enqTbl').innerHTML=C.map(([k,x,l,bg],i)=>{ const pe=k!=='sem', m=pe?rows.reduce((s,d)=>s+d.qm[i],0):0, f=pe?rows.reduce((s,d)=>s+d.qf[i],0):0;
+    return `<tr><td><i style="background:var(${bg})"></i>${l}</td><td>${fmt(x)}<small style="color:var(--muted);margin-left:6px">${P(x,uf)}</small></td><td>${pe?fmt(m+f):'-'}</td><td>${(m+f)?P(f,m+f):'-'}</td></tr>`; }).join('');
 }
 
 function renderRank(){
